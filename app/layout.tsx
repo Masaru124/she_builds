@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { B612 } from "next/font/google";
+
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -9,6 +11,12 @@ export const metadata: Metadata = {
     "A community-led ecosystem for women who build in tech, design, startups, and beyond.",
 };
 
+const b612 = B612({
+  subsets: ["latin"],
+  weight: ["400", "700"], // add what you need
+  style: ["normal", "italic"], // optional
+});
+
 export default function RootLayout({
   children,
 }: {
@@ -16,7 +24,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="antialiased bg-white text-neutral-900">
+      <body
+        className={`antialiased bg-white text-neutral-900 ${b612.className}`}
+      >
         <Header />
         <main>{children}</main>
         <Footer />
