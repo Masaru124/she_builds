@@ -56,7 +56,7 @@ const faqs = [
 ];
 
 const FAQs = () => {
-  const [openIndex, setOpenIndex] = useState(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
     <section className="py-16 bg-gray-50 ">
