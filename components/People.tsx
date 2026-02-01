@@ -174,7 +174,7 @@ export default function People() {
 
   return (
     <section className="bg-white py-16">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className=" mx-auto px-4">
         <div className="text-center mb-14">
           <h1 className="text-4xl font-bold text-gray-900 mb-3">Our Team</h1>
           <p className="text-gray-600">
