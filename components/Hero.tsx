@@ -16,8 +16,12 @@ const Hero = () => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
+    if (!textRef.current) return;
+
+    const elements = Array.from(textRef.current.children);
+
     gsap.fromTo(
-      textRef.current?.children,
+      elements,
       { opacity: 0, y: 40 },
       {
         opacity: 1,
