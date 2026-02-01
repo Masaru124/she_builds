@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { gsap } from "gsap";
+import gsap from "gsap";
 
 const images = [
   "/gallery/img1.jpg",
@@ -12,13 +12,13 @@ const images = [
 ];
 
 const Hero = () => {
-  const textRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement | null>(null);
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
     if (!textRef.current) return;
 
-    const elements = Array.from(textRef.current.children);
+    const elements = Array.from(textRef.current.children) as HTMLElement[];
 
     gsap.fromTo(
       elements,
@@ -40,19 +40,15 @@ const Hero = () => {
 
   return (
     <section className="relative overflow-hidden bg-linear-to-br from-purple-50 via-white to-pink-50">
-      {/* blobs */}
       <div className="absolute -top-32 -left-32 w-96 h-96 bg-purple-300/60 rounded-full blur-3xl animate-pulse" />
       <div className="absolute top-1/3 -right-32 w-96 h-96 bg-pink-300/50 rounded-full blur-3xl animate-pulse" />
 
       <div className="relative max-w-6xl mx-auto px-6 py-20 text-center">
-        {/* TEXT */}
         <div ref={textRef}>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-light tracking-tight text-neutral-900 max-w-4xl mx-auto">
             Building an ecosystem for{" "}
-            <span className="font-[new] font-bold">
-              <i>women</i>
-            </span>{" "}
-            who build in Bangalore
+            <span className="font-bold italic">women</span> who build in
+            Bangalore
           </h1>
 
           <p className="mt-6 text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto">
@@ -61,19 +57,18 @@ const Hero = () => {
           </p>
         </div>
 
-        {/* CAROUSEL */}
         <div className="relative mt-24 mx-auto w-full max-w-4xl">
           <div className="relative h-100 overflow-hidden rounded-xl">
             {images.map((src, i) => (
               <div
-                key={i}
+                key={src}
                 className={`absolute inset-0 transition-opacity duration-700 ${
                   i === index ? "opacity-100" : "opacity-0"
                 }`}
               >
                 <Image
                   src={src}
-                  alt=""
+                  alt="Event gallery"
                   fill
                   priority={i === 0}
                   className="object-cover"
