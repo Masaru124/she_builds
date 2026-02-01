@@ -52,7 +52,10 @@ export async function PUT(
     try {
       decoded = jwt.verify(token, JWT_SECRET) as { userId: string };
     } catch (err) {
-      return NextResponse.json({ error: "Invalid token" }, { status: 401 });
+      return NextResponse.json(
+        { error: `Invalid token ${err}` },
+        { status: 401 },
+      );
     }
 
     const existingPost = await prisma.post.findUnique({
@@ -131,7 +134,10 @@ export async function DELETE(
     try {
       decoded = jwt.verify(token, JWT_SECRET) as { userId: string };
     } catch (err) {
-      return NextResponse.json({ error: "Invalid token" }, { status: 401 });
+      return NextResponse.json(
+        { error: `Invalid token ${err}` },
+        { status: 401 },
+      );
     }
 
     const existingPost = await prisma.post.findUnique({

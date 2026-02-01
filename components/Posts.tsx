@@ -30,6 +30,7 @@ export default function PostsFeed() {
       setPosts(data.posts);
     } catch (err) {
       setError("Something went wrong while fetching posts.");
+      console.log(err);
     } finally {
       setLoading(false);
     }
@@ -63,9 +64,9 @@ export default function PostsFeed() {
         <p className="text-gray-500 text-center">No posts available.</p>
       ) : (
         <div className="flex flex-wrap justify-center gap-8 w-full">
-          {posts.map((post) => (
+          {posts.map((post, index) => (
             <article
-              key={post.id ?? post._id}
+              key={index}
               className="group bg-white w-100 rounded border border-black/20 overflow-hidden shadow-sm hover:shadow-lg transition"
             >
               {/* IMAGE */}
