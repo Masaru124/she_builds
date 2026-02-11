@@ -39,15 +39,15 @@ const Hero = () => {
     setIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
 
   return (
-    <section className="relative overflow-hidden bg-linear-to-br from-purple-50 via-white to-pink-50">
-      <div className="absolute -top-32 -left-32 w-96 h-96 bg-purple-300/60 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute top-1/3 -right-32 w-96 h-96 bg-pink-300/50 rounded-full blur-3xl animate-pulse" />
+    <section className="relative overflow-hidden bg-white mx-2 border-b border-dashed border-black/20">
+      <div className="absolute -top-32 -left-32 w-96 h-96 bg-purple-300/60 rounded-full blur-3xl" />
+      <div className="absolute top-1/3 -right-32 w-96 h-96 bg-pink-300/50 rounded-full blur-3xl" />
 
-      <div className="relative max-w-6xl mx-auto px-6 py-20 text-center">
+      <div className="relative max-w-6xl mx-auto px-6 py-12 text-center border-x border-dashed border-black/20">
         <div ref={textRef}>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-light tracking-tight text-neutral-900 max-w-4xl mx-auto">
             Building an ecosystem for{" "}
-            <span className="font-bold italic">women</span> who build in
+            <span className="font-bold italic text-purple-600">women</span> who build in
             Bangalore
           </h1>
 
@@ -58,7 +58,7 @@ const Hero = () => {
         </div>
 
         <div className="relative mt-24 mx-auto w-full max-w-4xl">
-          <div className="relative h-100 md:h-120 overflow-hidden rounded-xl">
+          <div className="relative h-100 md:h-120 overflow-hidden rounded-lg">
             {images.map((src, i) => (
               <div
                 key={src}

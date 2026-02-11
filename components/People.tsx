@@ -79,7 +79,7 @@ const TEAMS: Record<TeamKey, Person[]> = {
   Media: [
     {
       name: "Vivan",
-      image: "https://api.dicebear.com/7.x/bottts/png?seed=Vivan",
+      image: "/gallery/vivan.jpeg",
       linkedin: "#",
       instagram: "#",
     },
@@ -116,6 +116,24 @@ const TEAMS: Record<TeamKey, Person[]> = {
       linkedin: "#",
       instagram: "#",
     },
+    {
+      name: "Faiza",
+      image: "/gallery/faiza.jpeg",
+      linkedin: "#",
+      instagram: "#",
+    },
+    {
+      name: "Khushi",
+      image: "/gallery/khushi.jpeg",
+      linkedin: "#",
+      instagram: "#",
+    },
+    {
+      name: "Bharath",
+      image: "/gallery/bharath.jpeg",
+      linkedin: "#",
+      instagram: "#",
+    },
   ],
 };
 
@@ -125,27 +143,27 @@ const PersonCard = React.memo(function PersonCard({
   person: Person;
 }) {
   return (
-    <div className="w-80 flex flex-col overflow-hidden rounded-xl shadow border border-black/40 group">
-      <div className="relative w-full h-70 overflow-hidden">
+    <div className="w-80 flex flex-col overflow-hidden rounded-xl bg-white border border-black/20 group transition hover:border-black/30">
+      <div className="relative w-full h-64 overflow-hidden">
         <Image
           src={person.image}
           alt={person.name}
           fill
-          sizes="200px"
-          className="object-cover group-hover:scale-105 transition-transform duration-500"
+          sizes="320px"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
       </div>
 
-      <div className="bg-black/80 text-white text-center">
+      <div className="bg-black text-white text-center">
         <h3 className="text-lg font-semibold py-3">{person.name}</h3>
 
-        <div className="flex border-t border-white/20">
+        <div className="flex border-t border-dashed border-white/30">
           {person.linkedin && (
             <a
               href={person.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-3 border-r text-sm hover:bg-white hover:text-black transition"
+              className="w-full py-3 border-r border-dashed border-white/30 text-sm hover:bg-white hover:text-black transition"
             >
               LinkedIn
             </a>
@@ -169,12 +187,11 @@ const PersonCard = React.memo(function PersonCard({
 
 export default function People() {
   const [activeTeam, setActiveTeam] = useState<TeamKey>("Sponsorship");
-
   const people = useMemo(() => TEAMS[activeTeam], [activeTeam]);
 
   return (
-    <section className="bg-gray-50 py-16">
-      <div className=" mx-auto px-4">
+    <section className="bg-white px-2 border-b border-dashed border-black/20">
+      <div className="max-w-6xl mx-auto px-6 py-12 border-x border-b border-dashed border-black/20">
         <div className="text-center mb-14">
           <h1 className="text-4xl font-bold text-gray-900 mb-3">Our Team</h1>
           <p className="text-gray-600">
@@ -187,25 +204,25 @@ export default function People() {
             Bangalore Regional Head
           </h2>
 
-          <div className="w-80 flex flex-col overflow-hidden rounded-xl border border-black/40 group">
-            <div className="relative w-full h-70 overflow-hidden">
+          <div className="w-80 flex flex-col overflow-hidden rounded-xl bg-white border border-dashed border-black/20 group transition hover:border-black/30">
+            <div className="relative w-full h-64 overflow-hidden">
               <Image
                 src="/gallery/trisha.jpeg"
                 alt="Trisha"
                 fill
-                sizes="200px"
+                sizes="320px"
                 priority
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
             </div>
 
-            <div className="bg-black/80 text-white text-center">
+            <div className="bg-black text-white text-center">
               <h3 className="text-lg font-semibold py-3">Trisha</h3>
 
-              <div className="flex border-t border-white/20">
+              <div className="flex border-t border-dashed border-white/30">
                 <a
                   href="#"
-                  className="w-full py-3 border-r text-sm hover:bg-white hover:text-black transition"
+                  className="w-full py-3 border-r border-dashed border-white/30 text-sm hover:bg-white hover:text-black transition"
                 >
                   LinkedIn
                 </a>
@@ -229,8 +246,8 @@ export default function People() {
               className={`px-4 py-2 rounded text-sm font-medium transition
                 ${
                   activeTeam === team
-                    ? "bg-gray-600 text-white"
-                    : "bg-blue-100 text-neutral-700 hover:bg-blue-200"
+                    ? "bg-black text-white"
+                    : "bg-white border border-dashed border-black/20 text-neutral-700 hover:bg-blue-200"
                 }`}
             >
               {team}
@@ -238,7 +255,7 @@ export default function People() {
           ))}
         </div>
 
-        <div className="flex flex-wrap justify-center gap-8">
+        <div className="flex flex-wrap mx-auto max-w-5xl justify-center gap-8">
           {people.map((person, index) => (
             <PersonCard
               key={`${activeTeam}-${person.name}-${index}`}

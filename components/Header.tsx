@@ -4,8 +4,8 @@ import Link from "next/link";
 
 const Header = () => {
   return (
-    <header className=" top-0 z-50 backdrop-blur-md border border-black/30">
-      <div className="max-w-7xl mx-auto px-2 py-4 flex items-center justify-between">
+    <header className="sticky top-0 z-50 backdrop-blur-md  border border-dashed border-black/20">
+      <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
         <div className="text-xl font-bold uppercase text-purple-700">
           /shebuilds <span className="text-neutral-900">blr</span>
         </div>
@@ -15,7 +15,7 @@ const Header = () => {
             <li>
               <Link
                 href="https://www.shebuildsecosystem.com/register"
-                className=" bg-black px-3 py-2 text-white rounded hover:text-purple-700 transition"
+                className=" px-3 py-2 border border-dashed border-black/20 hover:bg-black hover:text-white text-black rounded font-bold transition"
               >
                 Join Us
               </Link>

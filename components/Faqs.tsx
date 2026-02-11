@@ -59,10 +59,10 @@ const FAQs = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="py-16 bg-gray-50 ">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="bg-white px-2 border-b border-dashed border-black/20">
+      <div className="max-w-6xl mx-auto px-6 py-16 border-x border-b border-dashed border-black/20">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-4xl font-bold  text-black">FAQs</h2>
+          <h2 className="text-4xl font-bold text-black">FAQs</h2>
           <p className="mt-4 text-gray-600">
             Everything you need to know about SheBuilds.
           </p>
@@ -75,23 +75,29 @@ const FAQs = () => {
             return (
               <div
                 key={index}
-                className="bg-white border border-gray-200 rounded-lg transition hover:bg-gray-50 shadow shadow-purple-100"
+                className="
+              bg-white
+              border border-dashed border-black/20
+              rounded-xl
+              transition
+              hover:bg-gray-50
+            "
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : index)}
                   className="flex items-center justify-between w-full px-4 py-5 sm:px-6"
                 >
-                  <span className="text font-semibold text-black text-left">
+                  <span className="font-semibold text-black text-left">
                     {faq.question}
                   </span>
 
-                  <p className="w-6 h-6 text-gray-400 items-center justify-center flex text-2xl font-light transition-all">
+                  <span className="w-6 h-6 flex items-center justify-center text-2xl font-light text-gray-500">
                     {isOpen ? "−" : "+"}
-                  </p>
+                  </span>
                 </button>
 
                 {isOpen && (
-                  <div className="px-4 pb-5 sm:px-6 text-gray-600">
+                  <div className="px-4 pb-5 sm:px-6 text-gray-600 leading-relaxed">
                     {faq.answer}
                   </div>
                 )}

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { format } from "date-fns";
+import Image from "next/image";
 
 interface Post {
   _id: string;
@@ -26,46 +27,76 @@ const PostCard = ({ post }: { post: Post }) => {
   const isUpcoming = post.eventDate && eventDay >= today;
 
   return (
-    <div className="bg-white rounded-xl border border-black/10 shadow-sm hover:shadow-lg transition flex flex-col overflow-hidden relative">
+    <div
+      className="
+    group relative flex flex-col overflow-hidden
+    rounded-xl bg-white
+    border border-dashed border-black/20
+    transition-all duration-300
+    hover:-translate-y-1 hover:border-black/30
+  "
+    >
       {post.imageUrl && (
-        <div className="relative h-52 w-full">
-          <img
+        <div className="relative h-52 w-full overflow-hidden">
+          <Image
             src={post.imageUrl}
             alt={post.title}
-            className="w-full h-full object-cover"
+            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+            width={400}
+            height={400}
             loading="lazy"
           />
 
+          {/* soft fade */}
+          <div className="absolute inset-0 bg-linear-to-t from-black/40 via-black/0 to-black/0" />
+
           {isUpcoming && (
-            <span className="absolute top-3 left-3 bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+            <span
+              className="
+            absolute top-3 left-3
+            rounded-full
+            border border-white/30
+            bg-white/15 backdrop-blur-md
+            px-3 py-1 text-xs font-semibold text-white
+          "
+            >
               Upcoming
             </span>
           )}
         </div>
       )}
 
-      <div className="p-5 flex flex-col flex-grow">
-        <h2 className="text-lg font-semibold text-gray-900 mb-2">
+      <div className="p-6 flex flex-col flex-grow">
+        <h2 className="text-lg font-semibold text-neutral-900 leading-snug">
           {post.title}
         </h2>
 
         {post.eventDate && (
-          <p className="text-sm text-blue-600 font-medium mb-3">
+          <p className="mt-2 text-sm font-medium text-neutral-700">
             📅 {format(new Date(post.eventDate), "MMM d, yyyy")}
           </p>
         )}
 
-        <p className="text-sm text-gray-600 line-clamp-3 mb-4">
+        <p className="mt-4 text-sm text-neutral-600 leading-relaxed line-clamp-3">
           {post.content}
         </p>
 
-        <div className="mt-auto flex flex-wrap gap-2">
+        {/* footer */}
+        <div className="mt-6 pt-5 border-t border-dashed border-black/10 flex flex-wrap gap-2">
           {post.pdfUrl && (
             <a
               href={post.pdfUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center px-3 py-2 text-xs font-medium rounded-md text-white bg-red-600 hover:bg-red-700"
+              className="
+            inline-flex items-center justify-center
+            rounded-lg
+            border border-black/15
+            bg-white
+            px-3 py-2 text-xs font-semibold text-neutral-900
+            hover:bg-neutral-50
+            transition
+          "
             >
               View PDF
             </a>
@@ -76,7 +107,14 @@ const PostCard = ({ post }: { post: Post }) => {
               href={post.registrationUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center px-4 py-2 text-xs font-medium rounded-md text-white bg-green-600 hover:bg-green-700"
+              className="
+            inline-flex items-center justify-center
+            rounded-lg
+            bg-neutral-900
+            px-4 py-2 text-xs font-semibold text-white
+            hover:bg-neutral-800
+            transition
+          "
             >
               {post.customButtonLabel || "Register"}
             </a>
@@ -137,10 +175,10 @@ const PostsFeed = () => {
   }
 
   return (
-    <section className="px-6 py-16 bg-gray-50">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold mb-12 text-gray-800 text-center">
-          Posts
+    <section className="bg-white px-2">
+      <div className="max-w-6xl mx-auto px-6 py-12 border-x border-b border-dashed border-black/20">
+        <h1 className="text-4xl font-bold mb-12 text-gray-900 text-center">
+          Events
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

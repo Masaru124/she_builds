@@ -5,7 +5,7 @@ import React from "react";
 const Footer = () => {
   return (
     <footer className="bg-black border-t border-white/10 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 pt-10 text-white">
+      <div className="max-w-6xl mx-auto px-6 pt-10 text-white">
         <div className="flex flex-col md:flex-row md:justify-between gap-14 border-b border-white/10 pb-12">
           <div className="max-w-sm">
             <h3 className="text-xl font-semibold tracking-wide">
@@ -75,13 +75,13 @@ const Footer = () => {
 
       bg-[linear-gradient(110deg,#a855f7,35%,#ffffff,50%,#7c3aed,65%,#a855f7)]
       translate-y-[30%]
-      bg-size-[200%_100%]
+      bg-size-[100%_100%]
       bg-clip-text
       text-transparent
       animate-[background-position_3s_linear_infinite]
     "
         >
-          SHEBUILDS
+          SheBuilds
         </h1>
       </div>
     </footer>
