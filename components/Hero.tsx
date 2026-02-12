@@ -57,7 +57,7 @@ const Hero = () => {
           </p>
         </div>
 
-        <div className="relative mt-24 mx-auto w-full max-w-4xl">
+        <div className="relative mt-14 mx-auto w-full max-w-4xl">
           <div className="relative h-100 md:h-120 overflow-hidden rounded-lg">
             {images.map((src, i) => (
               <div

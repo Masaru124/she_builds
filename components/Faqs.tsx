@@ -77,10 +77,11 @@ const FAQs = () => {
                 key={index}
                 className="
               bg-white
-              border border-dashed border-black/20
+              border border-dashed border-purple-600/40
               rounded-xl
               transition
               hover:bg-gray-50
+
             "
               >
                 <button

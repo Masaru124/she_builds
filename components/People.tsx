@@ -2,15 +2,61 @@
 
 import React, { useMemo, useState } from "react";
 import Image from "next/image";
+import { Linkedin, Instagram, Github, Globe, Twitter } from "lucide-react";
 
 type Person = {
   name: string;
   image: string;
-  linkedin?: string;
+
+  linkedin: string; // compulsory
+
   instagram?: string;
+  github?: string;
+  x?: string;
+  website?: string;
+
+  color?: string;
 };
 
 type TeamKey = "Sponsorship" | "Web" | "Design" | "Media" | "Marketing";
+
+const TEAM_COLORS: Record<TeamKey | "CoFounders" | "RegionalHead", string> = {
+  CoFounders: "bg-pink-50",
+  RegionalHead: "bg-purple-50",
+
+  Sponsorship: "bg-yellow-50",
+  Web: "bg-blue-50",
+  Design: "bg-green-50",
+  Media: "bg-red-50",
+  Marketing: "bg-orange-50",
+};
+
+const COFOUNDERS: Person[] = [
+  {
+    name: "Nikita",
+    image: "/gallery/nikita.jpeg",
+    linkedin: "#",
+    instagram: "#",
+    github: "#",
+    x: "#",
+    website: "#",
+  },
+  {
+    name: "Ekta",
+    image: "/gallery/ekta.jpeg",
+    linkedin: "#",
+    instagram: "#",
+  },
+];
+
+const REGIONAL_HEAD: Person[] = [
+  {
+    name: "Trisha",
+    image: "/gallery/trisha.jpeg",
+    linkedin: "#",
+    instagram: "#",
+  },
+];
 
 const TEAMS: Record<TeamKey, Person[]> = {
   Sponsorship: [
@@ -24,13 +70,13 @@ const TEAMS: Record<TeamKey, Person[]> = {
       name: "Harsh",
       image: "/gallery/harsh.jpeg",
       linkedin: "#",
-      instagram: "#",
     },
     {
       name: "Pia",
       image: "/gallery/pia.jpeg",
       linkedin: "#",
       instagram: "#",
+      x: "#",
     },
   ],
 
@@ -39,7 +85,8 @@ const TEAMS: Record<TeamKey, Person[]> = {
       name: "Bichitra",
       image: "/gallery/bichitra.jpeg",
       linkedin: "#",
-      instagram: "#",
+      github: "#",
+      website: "#",
     },
     {
       name: "Matharishwa",
@@ -47,12 +94,6 @@ const TEAMS: Record<TeamKey, Person[]> = {
       linkedin: "#",
       instagram: "#",
     },
-    // {
-    //   name: "Khushi",
-    //   image: "https://api.dicebear.com/7.x/pixel-art/png?seed=Khushi",
-    //   linkedin: "#",
-    //   instagram: "#",
-    // },
   ],
 
   Design: [
@@ -66,13 +107,19 @@ const TEAMS: Record<TeamKey, Person[]> = {
       name: "Moulika",
       image: "/gallery/moulika.jpeg",
       linkedin: "#",
-      instagram: "#",
+      website: "#",
     },
     {
       name: "Moulya",
       image: "/gallery/amulya.jpeg",
       linkedin: "#",
       instagram: "#",
+    },
+    {
+      name: "Sushanth",
+      image: "/gallery/sushant.jpeg",
+      linkedin: "#",
+      github: "#",
     },
   ],
 
@@ -82,6 +129,7 @@ const TEAMS: Record<TeamKey, Person[]> = {
       image: "/gallery/vivan.jpeg",
       linkedin: "#",
       instagram: "#",
+      x: "#",
     },
     {
       name: "Sachin",
@@ -102,7 +150,6 @@ const TEAMS: Record<TeamKey, Person[]> = {
       name: "Naman",
       image: "/gallery/naman.jpeg",
       linkedin: "#",
-      instagram: "#",
     },
     {
       name: "Lohitha",
@@ -120,22 +167,25 @@ const TEAMS: Record<TeamKey, Person[]> = {
       name: "Faiza",
       image: "/gallery/faiza.jpeg",
       linkedin: "#",
-      instagram: "#",
     },
     {
       name: "Khushi",
       image: "/gallery/khushi.jpeg",
       linkedin: "#",
       instagram: "#",
+      x: "#",
     },
     {
       name: "Bharath",
       image: "/gallery/bharath.jpeg",
       linkedin: "#",
-      instagram: "#",
+      github: "#",
     },
   ],
 };
+
+/* ✅ Helper: prevents icons showing if link is "#" */
+const hasLink = (url?: string) => !!url && url.trim() !== "#";
 
 const PersonCard = React.memo(function PersonCard({
   person,
@@ -143,51 +193,119 @@ const PersonCard = React.memo(function PersonCard({
   person: Person;
 }) {
   return (
-    <div className="w-80 flex flex-col overflow-hidden rounded-xl bg-white border border-black/20 group transition hover:border-black/30">
-      <div className="relative w-full h-64 overflow-hidden">
-        <Image
-          src={person.image}
-          alt={person.name}
-          fill
-          sizes="320px"
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-      </div>
+    <div className="w-64 group">
+      <div
+        className={`relative overflow-hidden rounded-2xl border border-dashed border-black/10 transition-all duration-300 ${
+          person.color ?? "bg-white"
+        }`}
+      >
+        <div className="relative p-3">
+          <div className="relative w-full h-56 overflow-hidden rounded-xl border border-black/10">
+            <Image
+              src={person.image}
+              alt={person.name}
+              fill
+              sizes="256px"
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          </div>
 
-      <div className="bg-black text-white text-center">
-        <h3 className="text-lg font-semibold py-3">{person.name}</h3>
+          <div className="pt-4 pb-3 px-1 flex items-center justify-between">
+            <div>
+              <h3 className="text-base font-semibold text-neutral-900">
+                {person.name}
+              </h3>
+            </div>
 
-        <div className="flex border-t border-dashed border-white/30">
-          {person.linkedin && (
-            <a
-              href={person.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full py-3 border-r border-dashed border-white/30 text-sm hover:bg-white hover:text-black transition"
-            >
-              LinkedIn
-            </a>
-          )}
+            <div className="flex items-center gap-2">
+              {/* LinkedIn (compulsory always visible) */}
+              <a
+                href={person.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-xl border border-black/10 bg-white/60 hover:bg-blue-600 transition"
+              >
+                <Linkedin className="w-4 h-4 text-neutral-900" />
+              </a>
 
-          {person.instagram && (
-            <a
-              href={person.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full py-3 text-sm hover:bg-white hover:text-black transition"
-            >
-              Instagram
-            </a>
-          )}
+              {/* GitHub */}
+              {hasLink(person.github) && (
+                <a
+                  href={person.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-xl border border-black/10 bg-white/60 hover:bg-black transition"
+                >
+                  <Github className="w-4 h-4 text-neutral-900" />
+                </a>
+              )}
+
+              {/* X / Twitter */}
+              {hasLink(person.x) && (
+                <a
+                  href={person.x}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-xl border border-black/10 bg-white/60 hover:bg-neutral-900 transition"
+                >
+                  <Twitter className="w-4 h-4 text-neutral-900" />
+                </a>
+              )}
+
+              {/* Instagram */}
+              {hasLink(person.instagram) && (
+                <a
+                  href={person.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-xl border border-black/10 bg-white/60 hover:bg-pink-500 transition"
+                >
+                  <Instagram className="w-4 h-4 text-neutral-900" />
+                </a>
+              )}
+
+              {/* Website */}
+              {hasLink(person.website) && (
+                <a
+                  href={person.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-xl border border-black/10 bg-white/60 hover:bg-purple-600 transition"
+                >
+                  <Globe className="w-4 h-4 text-neutral-900" />
+                </a>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 });
 
+function PeopleSection({ title, people }: { title: string; people: Person[] }) {
+  return (
+    <div className="pb-10 flex flex-col items-center gap-6">
+      <h2 className="text-purple-600 font-semibold text-2xl">{title}</h2>
+
+      <div className="flex flex-wrap justify-center gap-8">
+        {people.map((person, index) => (
+          <PersonCard key={`${title}-${person.name}-${index}`} person={person} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function People() {
   const [activeTeam, setActiveTeam] = useState<TeamKey>("Sponsorship");
-  const people = useMemo(() => TEAMS[activeTeam], [activeTeam]);
+
+  const people = useMemo(() => {
+    return TEAMS[activeTeam].map((p) => ({
+      ...p,
+      color: TEAM_COLORS[activeTeam],
+    }));
+  }, [activeTeam]);
 
   return (
     <section className="bg-white px-2 border-b border-dashed border-black/20">
@@ -199,69 +317,52 @@ export default function People() {
           </p>
         </div>
 
-        <div className="pb-20 flex flex-col items-center gap-4">
+        <PeopleSection
+          title="Co-Founders"
+          people={COFOUNDERS.map((p) => ({
+            ...p,
+            color: TEAM_COLORS.CoFounders,
+          }))}
+        />
+
+        <PeopleSection
+          title="Bangalore Regional Head"
+          people={REGIONAL_HEAD.map((p) => ({
+            ...p,
+            color: TEAM_COLORS.RegionalHead,
+          }))}
+        />
+
+        <div className="pb-10 flex flex-col items-center gap-8">
           <h2 className="text-purple-600 font-semibold text-xl">
-            Bangalore Regional Head
+            Core Team Members
           </h2>
 
-          <div className="w-80 flex flex-col overflow-hidden rounded-xl bg-white border border-dashed border-black/20 group transition hover:border-black/30">
-            <div className="relative w-full h-64 overflow-hidden">
-              <Image
-                src="/gallery/trisha.jpeg"
-                alt="Trisha"
-                fill
-                sizes="320px"
-                priority
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
-
-            <div className="bg-black text-white text-center">
-              <h3 className="text-lg font-semibold py-3">Trisha</h3>
-
-              <div className="flex border-t border-dashed border-white/30">
-                <a
-                  href="#"
-                  className="w-full py-3 border-r border-dashed border-white/30 text-sm hover:bg-white hover:text-black transition"
-                >
-                  LinkedIn
-                </a>
-
-                <a
-                  href="#"
-                  className="w-full py-3 text-sm hover:bg-white hover:text-black transition"
-                >
-                  Instagram
-                </a>
-              </div>
-            </div>
+          <div className="flex flex-wrap justify-center gap-3">
+            {(Object.keys(TEAMS) as TeamKey[]).map((team) => (
+              <button
+                key={team}
+                onClick={() => setActiveTeam(team)}
+                className={`px-4 py-2 rounded text-[12px] font-medium transition
+                  ${
+                    activeTeam === team
+                      ? "bg-black text-white"
+                      : "bg-white border border-dashed border-black/20 text-neutral-700 hover:bg-blue-200"
+                  }`}
+              >
+                {team}
+              </button>
+            ))}
           </div>
-        </div>
 
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {(Object.keys(TEAMS) as TeamKey[]).map((team, index) => (
-            <button
-              key={index}
-              onClick={() => setActiveTeam(team)}
-              className={`px-4 py-2 rounded text-sm font-medium transition
-                ${
-                  activeTeam === team
-                    ? "bg-black text-white"
-                    : "bg-white border border-dashed border-black/20 text-neutral-700 hover:bg-blue-200"
-                }`}
-            >
-              {team}
-            </button>
-          ))}
-        </div>
-
-        <div className="flex flex-wrap mx-auto max-w-5xl justify-center gap-8">
-          {people.map((person, index) => (
-            <PersonCard
-              key={`${activeTeam}-${person.name}-${index}`}
-              person={person}
-            />
-          ))}
+          <div className="flex flex-wrap mx-auto max-w-5xl justify-center gap-8">
+            {people.map((person, index) => (
+              <PersonCard
+                key={`${activeTeam}-${person.name}-${index}`}
+                person={person}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
