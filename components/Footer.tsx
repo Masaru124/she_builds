@@ -52,6 +52,14 @@ const Footer = () => {
                     Instagram
                   </a>
                 </li>
+                <li className="hover:text-white transition cursor-pointer">
+                  <a href="https://discord.gg/mfjz9UkCe">Discord</a>
+                </li>
+                <li className="hover:text-white transition cursor-pointer">
+                  <a href="https://www.linkedin.com/company/shebuildsecosystem/">
+                    LinkedIn
+                  </a>
+                </li>
               </ul>
             </div>
           </div>

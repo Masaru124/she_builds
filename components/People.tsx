@@ -21,8 +21,8 @@ type Person = {
 type TeamKey = "Sponsorship" | "Web" | "Design" | "Media" | "Marketing";
 
 const TEAM_COLORS: Record<TeamKey | "CoFounders" | "RegionalHead", string> = {
-  CoFounders: "bg-pink-50",
-  RegionalHead: "bg-purple-50",
+  CoFounders: "bg-pink-200",
+  RegionalHead: "bg-purple-100",
 
   Sponsorship: "bg-yellow-50",
   Web: "bg-blue-50",
@@ -137,6 +137,12 @@ const TEAMS: Record<TeamKey, Person[]> = {
       linkedin: "#",
       instagram: "#",
     },
+    {
+      name: "Gnanesh",
+      image: "/gallery/gnanesh.jpeg",
+      linkedin: "#",
+      instagram: "#",
+    },
   ],
 
   Marketing: [
@@ -184,7 +190,6 @@ const TEAMS: Record<TeamKey, Person[]> = {
   ],
 };
 
-/* ✅ Helper: prevents icons showing if link is "#" */
 const hasLink = (url?: string) => !!url && url.trim() !== "#";
 
 const PersonCard = React.memo(function PersonCard({
@@ -290,7 +295,10 @@ function PeopleSection({ title, people }: { title: string; people: Person[] }) {
 
       <div className="flex flex-wrap justify-center gap-8">
         {people.map((person, index) => (
-          <PersonCard key={`${title}-${person.name}-${index}`} person={person} />
+          <PersonCard
+            key={`${title}-${person.name}-${index}`}
+            person={person}
+          />
         ))}
       </div>
     </div>
