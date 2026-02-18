@@ -45,10 +45,13 @@ const Hero = () => {
 
       <div className="relative max-w-6xl mx-auto px-6 py-12 text-center border-x border-dashed border-black/20">
         <div ref={textRef}>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-light tracking-tight text-neutral-900 max-w-4xl mx-auto">
+          <h1 className="mx-auto max-w-4xl text-4xl font-light tracking-tight text-neutral-900 sm:text-5xl md:text-6xl">
             Building an ecosystem for{" "}
-            <span className="font-bold italic text-purple-600">women</span> who build in
-            Bangalore
+            <span className="font-semibold italic text-purple-600">women</span>{" "}
+            who build in{" "}
+            <span className="underline decoration-purple-600 decoration-wavy underline-offset-8">
+              Bangalore
+            </span>
           </h1>
 
           <p className="mt-6 text md:text-xl text-neutral-600 max-w-2xl mx-auto">

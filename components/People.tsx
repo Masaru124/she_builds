@@ -7,14 +7,11 @@ import { Linkedin, Instagram, Github, Globe, Twitter } from "lucide-react";
 type Person = {
   name: string;
   image: string;
-
-  linkedin: string; // compulsory
-
+  linkedin: string;
   instagram?: string;
   github?: string;
   x?: string;
   website?: string;
-
   color?: string;
 };
 
@@ -23,12 +20,11 @@ type TeamKey = "Sponsorship" | "Web" | "Design" | "Media" | "Marketing";
 const TEAM_COLORS: Record<TeamKey | "CoFounders" | "RegionalHead", string> = {
   CoFounders: "bg-pink-200",
   RegionalHead: "bg-purple-100",
-
-  Sponsorship: "bg-yellow-50",
-  Web: "bg-blue-50",
-  Design: "bg-green-50",
-  Media: "bg-red-50",
-  Marketing: "bg-orange-50",
+  Sponsorship: "bg-yellow-100",
+  Web: "bg-blue-100",
+  Design: "bg-green-100",
+  Media: "bg-red-100",
+  Marketing: "bg-orange-100",
 };
 
 const COFOUNDERS: Person[] = [
@@ -41,12 +37,7 @@ const COFOUNDERS: Person[] = [
     x: "#",
     website: "#",
   },
-  {
-    name: "Ekta",
-    image: "/gallery/ekta.jpeg",
-    linkedin: "#",
-    instagram: "#",
-  },
+  { name: "Ekta", image: "/gallery/ekta.jpeg", linkedin: "#", instagram: "#" },
 ];
 
 const REGIONAL_HEAD: Person[] = [
@@ -66,11 +57,7 @@ const TEAMS: Record<TeamKey, Person[]> = {
       linkedin: "#",
       instagram: "#",
     },
-    {
-      name: "Harsh",
-      image: "/gallery/harsh.jpeg",
-      linkedin: "#",
-    },
+    { name: "Harsh", image: "/gallery/harsh.jpeg", linkedin: "#" },
     {
       name: "Pia",
       image: "/gallery/pia.jpeg",
@@ -78,8 +65,14 @@ const TEAMS: Record<TeamKey, Person[]> = {
       instagram: "#",
       x: "#",
     },
+    {
+      name: "Mehran",
+      image: "/gallery/mehran.jpeg",
+      linkedin: "#",
+      instagram: "#",
+      x: "#",
+    },
   ],
-
   Web: [
     {
       name: "Bichitra",
@@ -95,7 +88,6 @@ const TEAMS: Record<TeamKey, Person[]> = {
       instagram: "#",
     },
   ],
-
   Design: [
     {
       name: "Raksha",
@@ -122,7 +114,6 @@ const TEAMS: Record<TeamKey, Person[]> = {
       github: "#",
     },
   ],
-
   Media: [
     {
       name: "Vivan",
@@ -144,36 +135,27 @@ const TEAMS: Record<TeamKey, Person[]> = {
       instagram: "#",
     },
   ],
-
   Marketing: [
+    {
+      name: "Bharath",
+      image: "/gallery/bharath.jpeg",
+      linkedin: "#",
+      github: "#",
+    },
     {
       name: "Tathagat",
       image: "/gallery/thatagat.jpeg",
       linkedin: "#",
       instagram: "#",
     },
-    {
-      name: "Naman",
-      image: "/gallery/naman.jpeg",
-      linkedin: "#",
-    },
+    { name: "Naman", image: "/gallery/naman.jpeg", linkedin: "#" },
     {
       name: "Lohitha",
       image: "/gallery/lohitha.jpeg",
       linkedin: "#",
       instagram: "#",
     },
-    {
-      name: "Erum",
-      image: "/gallery/erum.jpeg",
-      linkedin: "#",
-      instagram: "#",
-    },
-    {
-      name: "Faiza",
-      image: "/gallery/faiza.jpeg",
-      linkedin: "#",
-    },
+    { name: "Faiza", image: "/gallery/faiza.jpeg", linkedin: "#" },
     {
       name: "Khushi",
       image: "/gallery/khushi.jpeg",
@@ -181,16 +163,18 @@ const TEAMS: Record<TeamKey, Person[]> = {
       instagram: "#",
       x: "#",
     },
-    {
-      name: "Bharath",
-      image: "/gallery/bharath.jpeg",
-      linkedin: "#",
-      github: "#",
-    },
   ],
 };
 
 const hasLink = (url?: string) => !!url && url.trim() !== "#";
+
+function DashedSection({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="border-t border-dashed border-black/20 py-10">
+      {children}
+    </div>
+  );
+}
 
 const PersonCard = React.memo(function PersonCard({
   person,
@@ -216,14 +200,11 @@ const PersonCard = React.memo(function PersonCard({
           </div>
 
           <div className="pt-4 pb-3 px-1 flex items-center justify-between">
-            <div>
-              <h3 className="text-base font-semibold text-neutral-900">
-                {person.name}
-              </h3>
-            </div>
+            <h3 className="text-base font-semibold text-neutral-900">
+              {person.name}
+            </h3>
 
             <div className="flex items-center gap-2">
-              {/* LinkedIn (compulsory always visible) */}
               <a
                 href={person.linkedin}
                 target="_blank"
@@ -233,7 +214,6 @@ const PersonCard = React.memo(function PersonCard({
                 <Linkedin className="w-4 h-4 text-neutral-900" />
               </a>
 
-              {/* GitHub */}
               {hasLink(person.github) && (
                 <a
                   href={person.github}
@@ -245,7 +225,6 @@ const PersonCard = React.memo(function PersonCard({
                 </a>
               )}
 
-              {/* X / Twitter */}
               {hasLink(person.x) && (
                 <a
                   href={person.x}
@@ -257,7 +236,6 @@ const PersonCard = React.memo(function PersonCard({
                 </a>
               )}
 
-              {/* Instagram */}
               {hasLink(person.instagram) && (
                 <a
                   href={person.instagram}
@@ -269,7 +247,6 @@ const PersonCard = React.memo(function PersonCard({
                 </a>
               )}
 
-              {/* Website */}
               {hasLink(person.website) && (
                 <a
                   href={person.website}
@@ -316,8 +293,8 @@ export default function People() {
   }, [activeTeam]);
 
   return (
-    <section className="bg-white px-2 border-b border-dashed border-black/20">
-      <div className="max-w-6xl mx-auto px-6 py-12 border-x border-b border-dashed border-black/20">
+    <section className="bg-white px-2 border-b border-t border-dashed border-black/20">
+      <div className="max-w-6xl mx-auto pt-12 border-x border-dashed border-black/20">
         <div className="text-center mb-14">
           <h1 className="text-4xl font-bold text-gray-900 mb-3">Our Team</h1>
           <p className="text-gray-600">
@@ -325,53 +302,59 @@ export default function People() {
           </p>
         </div>
 
-        <PeopleSection
-          title="Co-Founders"
-          people={COFOUNDERS.map((p) => ({
-            ...p,
-            color: TEAM_COLORS.CoFounders,
-          }))}
-        />
+        <DashedSection>
+          <PeopleSection
+            title="Co-Founders"
+            people={COFOUNDERS.map((p) => ({
+              ...p,
+              color: TEAM_COLORS.CoFounders,
+            }))}
+          />
+        </DashedSection>
 
-        <PeopleSection
-          title="Bangalore Regional Head"
-          people={REGIONAL_HEAD.map((p) => ({
-            ...p,
-            color: TEAM_COLORS.RegionalHead,
-          }))}
-        />
+        <DashedSection>
+          <PeopleSection
+            title="Bangalore Regional Head"
+            people={REGIONAL_HEAD.map((p) => ({
+              ...p,
+              color: TEAM_COLORS.RegionalHead,
+            }))}
+          />
+        </DashedSection>
 
-        <div className="pb-10 flex flex-col items-center gap-8">
-          <h2 className="text-purple-600 font-semibold text-xl">
-            Core Team Members
-          </h2>
+        <DashedSection>
+          <div className="pb-10 flex flex-col items-center gap-8">
+            <h2 className="text-purple-600 font-semibold text-2xl">
+              Core Team Members
+            </h2>
 
-          <div className="flex flex-wrap justify-center gap-3">
-            {(Object.keys(TEAMS) as TeamKey[]).map((team) => (
-              <button
-                key={team}
-                onClick={() => setActiveTeam(team)}
-                className={`px-4 py-2 rounded text-[12px] font-medium transition
-                  ${
-                    activeTeam === team
-                      ? "bg-black text-white"
-                      : "bg-white border border-dashed border-black/20 text-neutral-700 hover:bg-blue-200"
-                  }`}
-              >
-                {team}
-              </button>
-            ))}
+            <div className="flex flex-wrap justify-center gap-3">
+              {(Object.keys(TEAMS) as TeamKey[]).map((team) => (
+                <button
+                  key={team}
+                  onClick={() => setActiveTeam(team)}
+                  className={`px-4 py-2 rounded text-[12px] font-medium transition
+            ${
+              activeTeam === team
+                ? "bg-black text-white"
+                : "bg-white border border-dashed border-black/20 text-neutral-700 hover:bg-blue-200"
+            }`}
+                >
+                  {team}
+                </button>
+              ))}
+            </div>
+
+            <div className="flex flex-wrap mx-auto max-w-5xl justify-center gap-8">
+              {people.map((person, index) => (
+                <PersonCard
+                  key={`${activeTeam}-${person.name}-${index}`}
+                  person={person}
+                />
+              ))}
+            </div>
           </div>
-
-          <div className="flex flex-wrap mx-auto max-w-5xl justify-center gap-8">
-            {people.map((person, index) => (
-              <PersonCard
-                key={`${activeTeam}-${person.name}-${index}`}
-                person={person}
-              />
-            ))}
-          </div>
-        </div>
+        </DashedSection>
       </div>
     </section>
   );
