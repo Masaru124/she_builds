@@ -9,13 +9,13 @@ import React from "react";
 const Home = () => {
   return (
     <>
-      <SmoothScrollProvider>
+      {/* <SmoothScrollProvider> */}
         <Hero />
         <About />
         <Posts/>
         <People />
         <FAQs/>
-      </SmoothScrollProvider>
+      {/* </SmoothScrollProvider> */}
     </>
   );
 };

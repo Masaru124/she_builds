@@ -1,6 +1,44 @@
 "use client";
 
 import React from "react";
+import { TextHoverEffect } from "./ui/text-hover-effect";
+
+import {
+  FaInstagram,
+  FaDiscord,
+  FaXTwitter,
+  FaLinkedin,
+  FaGithub,
+  FaGlobe,
+} from "react-icons/fa6";
+
+const SOCIAL_LINKS = [
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/shebuilds_bangalore",
+    icon: FaInstagram,
+  },
+  {
+    name: "Discord",
+    href: "https://discord.gg/mfjz9UkCe",
+    icon: FaDiscord,
+  },
+  {
+    name: "X",
+    href: "https://x.com/SheBuildsEco",
+    icon: FaXTwitter,
+  },
+  {
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/company/shebuildsecosystem/", // replace with real link
+    icon: FaLinkedin,
+  },
+  {
+    name: "Website",
+    href: "https://www.shebuildsecosystem.com",
+    icon: FaGlobe,
+  },
+];
 
 const Footer = () => {
   return (
@@ -34,33 +72,25 @@ const Footer = () => {
             </div>
 
             <div>
-              <h4 className="font-semibold text-white mb-5 tracking-wide">
-                Connect
-              </h4>
+              <h4 className="font-semibold mb-5 tracking-wide">Connect</h4>
 
-              <ul className="space-y-3 underline text-white/60">
-                <li>
-                  <a
-                    href="mailto:shebuildsblr@gmail.com"
-                    className="hover:text-white transition"
-                  >
-                    shebuildsblr@gmail.com
-                  </a>
-                </li>
-                <li className="hover:text-white transition cursor-pointer">
-                  <a href="https://www.instagram.com/shebuilds_bangalore?igsh=MXdkcXU4amkwNjBrNw==">
-                    Instagram
-                  </a>
-                </li>
-                <li className="hover:text-white transition cursor-pointer">
-                  <a href="https://discord.gg/mfjz9UkCe">Discord</a>
-                </li>
-                <li className="hover:text-white transition cursor-pointer">
-                  <a href="https://www.linkedin.com/company/shebuildsecosystem/">
-                    LinkedIn
-                  </a>
-                </li>
-              </ul>
+              <div className="flex items-center gap-4">
+                {SOCIAL_LINKS.map((social) => {
+                  const Icon = social.icon;
+
+                  return (
+                    <a
+                      key={social.name}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-3 rounded-full border border-white/10 bg-white/5 hover:bg-white hover:text-black transition-all duration-300"
+                    >
+                      <Icon size={18} />
+                    </a>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
@@ -70,28 +100,9 @@ const Footer = () => {
         </p>
       </div>
 
-      <div className="relative ">
-        <h1
-          className="
-      text-[22vw] md:text-[14vw]
-      font-extrabold
-      leading-none
-      text-center
-      select-none
-      pointer-events-none
-      font-[new]
-
-      bg-[linear-gradient(110deg,#a855f7,35%,#ffffff,50%,#7c3aed,65%,#a855f7)]
-      translate-y-[30%]
-      bg-size-[100%_100%]
-      bg-clip-text
-      text-transparent
-      animate-[background-position_3s_linear_infinite]
-    "
-        >
-          SheBuilds
-        </h1>
-      </div>
+      <div className="m-0 md:pt-10 leading-none">
+  <TextHoverEffect text="SheBuilds" />
+</div>
     </footer>
   );
 };

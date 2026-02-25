@@ -18,13 +18,13 @@ type Person = {
 type TeamKey = "Sponsorship" | "Web" | "Design" | "Media" | "Marketing";
 
 const TEAM_COLORS: Record<TeamKey | "CoFounders" | "RegionalHead", string> = {
-  CoFounders: "bg-pink-200",
-  RegionalHead: "bg-purple-100",
-  Sponsorship: "bg-yellow-100",
-  Web: "bg-blue-100",
-  Design: "bg-green-100",
-  Media: "bg-red-100",
-  Marketing: "bg-orange-100",
+  CoFounders: "bg-pink-50",
+  RegionalHead: "bg-purple-50",
+  Sponsorship: "bg-yellow-50",
+  Web: "bg-blue-50",
+  Design: "bg-green-50",
+  Media: "bg-red-50",
+  Marketing: "bg-orange-50",
 };
 
 const COFOUNDERS: Person[] = [
@@ -123,12 +123,6 @@ const TEAMS: Record<TeamKey, Person[]> = {
       x: "#",
     },
     {
-      name: "Sachin",
-      image: "https://api.dicebear.com/7.x/lorelei/png?seed=Sachin",
-      linkedin: "#",
-      instagram: "#",
-    },
-    {
       name: "Gnanesh",
       image: "/gallery/gnanesh.jpeg",
       linkedin: "#",
@@ -182,14 +176,14 @@ const PersonCard = React.memo(function PersonCard({
   person: Person;
 }) {
   return (
-    <div className="w-64 group">
+    <div className="w-74 group">
       <div
-        className={`relative overflow-hidden rounded-2xl border border-dashed border-black/10 transition-all duration-300 ${
+        className={`relative overflow-hidden rounded-2xl border  border-black/10 transition-all duration-300 ${
           person.color ?? "bg-white"
         }`}
       >
         <div className="relative p-3">
-          <div className="relative w-full h-56 overflow-hidden rounded-xl border border-black/10">
+          <div className="relative w-full h-66 overflow-hidden rounded-xl border border-black/10">
             <Image
               src={person.image}
               alt={person.name}
@@ -296,8 +290,8 @@ export default function People() {
     <section className="bg-white px-2 border-b border-t border-dashed border-black/20">
       <div className="max-w-6xl mx-auto pt-12 border-x border-dashed border-black/20">
         <div className="text-center mb-14">
-          <h1 className="text-4xl font-bold text-gray-900 mb-3">Our Team</h1>
-          <p className="text-gray-600">
+          <h1 className="text-3xl font-bold text-gray-900 mb-3">Our Team</h1>
+          <p className="text-gray-600 max-w-90 mx-auto">
             Meet the passionate individuals driving SheBuilds forward
           </p>
         </div>
@@ -333,11 +327,11 @@ export default function People() {
                 <button
                   key={team}
                   onClick={() => setActiveTeam(team)}
-                  className={`px-4 py-2 rounded text-[12px] font-medium transition
+                  className={`px-4 py-2 rounded-2xl text-[12px] font-medium transition
             ${
               activeTeam === team
                 ? "bg-black text-white"
-                : "bg-white border border-dashed border-black/20 text-neutral-700 hover:bg-blue-200"
+                : "bg-white border border-black/20 text-neutral-700 hover:bg-blue-200"
             }`}
                 >
                   {team}

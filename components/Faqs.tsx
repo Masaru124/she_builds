@@ -62,7 +62,7 @@ const FAQs = () => {
     <section className="bg-white px-2 border-b border-dashed border-black/20">
       <div className="max-w-6xl mx-auto px-6 py-16 border-x border-b border-dashed border-black/20">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-4xl font-bold text-black">FAQs</h2>
+          <h2 className="text-3xl font-bold text-black">FAQs</h2>
           <p className="mt-4 text-gray-600">
             Everything you need to know about SheBuilds.
           </p>
@@ -77,7 +77,7 @@ const FAQs = () => {
                 key={index}
                 className="
               bg-white
-              border border-dashed border-purple-600/40
+              border border-purple-600/10
               rounded-xl
               transition
               hover:bg-gray-50
