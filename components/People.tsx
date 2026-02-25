@@ -178,9 +178,8 @@ const PersonCard = React.memo(function PersonCard({
   return (
     <div className="w-74 group">
       <div
-        className={`relative overflow-hidden rounded-2xl border  border-black/10 transition-all duration-300 ${
-          person.color ?? "bg-white"
-        }`}
+        className={`relative overflow-hidden rounded-2xl border  border-black/10 transition-all duration-300 ${person.color ?? "bg-white"
+          }`}
       >
         <div className="relative p-3">
           <div className="relative w-full h-66 overflow-hidden rounded-xl border border-black/10">
@@ -261,8 +260,10 @@ const PersonCard = React.memo(function PersonCard({
 
 function PeopleSection({ title, people }: { title: string; people: Person[] }) {
   return (
-    <div className="pb-10 flex flex-col items-center gap-6">
-      <h2 className="text-purple-600 font-semibold text-2xl">{title}</h2>
+    <div className=" flex flex-col items-center gap-6">
+      <h2 className="text-purple-600 font-semibold text-2xl sm:text-3xl">
+        {title}
+      </h2>
 
       <div className="flex flex-wrap justify-center gap-8">
         {people.map((person, index) => (
@@ -287,11 +288,13 @@ export default function People() {
   }, [activeTeam]);
 
   return (
-    <section className="bg-white px-2 border-b border-t border-dashed border-black/20">
-      <div className="max-w-6xl mx-auto pt-12 border-x border-dashed border-black/20">
-        <div className="text-center mb-14">
-          <h1 className="text-3xl font-bold text-gray-900 mb-3">Our Team</h1>
-          <p className="text-gray-600 max-w-90 mx-auto">
+    <section className="bg-white px-4  border-t border-dashed border-black/20">
+      <div className="max-w-6xl mx-auto pt-12  border-x border-b border-dashed border-black/20">
+        <div className="text-center mb-12">
+          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
+            Our Team
+          </h1>
+          <p className="text-sm sm:text-base text-gray-600 max-w-90 mx-auto">
             Meet the passionate individuals driving SheBuilds forward
           </p>
         </div>
@@ -318,7 +321,7 @@ export default function People() {
 
         <DashedSection>
           <div className="pb-10 flex flex-col items-center gap-8">
-            <h2 className="text-purple-600 font-semibold text-2xl">
+            <h2 className="text-purple-600 font-semibold text-2xl sm:text-3xl">
               Core Team Members
             </h2>
 
@@ -327,12 +330,11 @@ export default function People() {
                 <button
                   key={team}
                   onClick={() => setActiveTeam(team)}
-                  className={`px-4 py-2 rounded-2xl text-[12px] font-medium transition
-            ${
-              activeTeam === team
-                ? "bg-black text-white"
-                : "bg-white border border-black/20 text-neutral-700 hover:bg-blue-200"
-            }`}
+                  className={`px-4 py-2 rounded-2xl text-xs sm:text-sm font-medium transition
+            ${activeTeam === team
+                      ? "bg-black text-white"
+                      : "bg-white border border-black/20 text-neutral-700 hover:bg-blue-200"
+                    }`}
                 >
                   {team}
                 </button>

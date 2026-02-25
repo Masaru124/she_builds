@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useMemo, useState } from "react";
 import { motion } from "motion/react";
 
 export const TextHoverEffect = ({
@@ -11,20 +11,26 @@ export const TextHoverEffect = ({
   automatic?: boolean;
 }) => {
   const svgRef = useRef<SVGSVGElement>(null);
+
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
   const [hovered, setHovered] = useState(false);
-  const [maskPosition, setMaskPosition] = useState({ cx: "50%", cy: "50%" });
 
-  useEffect(() => {
-    if (svgRef.current && cursor.x !== null && cursor.y !== null) {
-      const svgRect = svgRef.current.getBoundingClientRect();
-      const cxPercentage = ((cursor.x - svgRect.left) / svgRect.width) * 100;
-      const cyPercentage = ((cursor.y - svgRect.top) / svgRect.height) * 100;
-      setMaskPosition({
-        cx: `${cxPercentage}%`,
-        cy: `${cyPercentage}%`,
-      });
+  const maskPosition = useMemo(() => {
+    if (!svgRef.current) {
+      return { cx: "50%", cy: "50%" };
     }
+
+    const svgRect = svgRef.current.getBoundingClientRect();
+
+    const cxPercentage =
+      ((cursor.x - svgRect.left) / svgRect.width) * 100;
+    const cyPercentage =
+      ((cursor.y - svgRect.top) / svgRect.height) * 100;
+
+    return {
+      cx: `${cxPercentage}%`,
+      cy: `${cyPercentage}%`,
+    };
   }, [cursor]);
 
   return (
@@ -37,7 +43,9 @@ export const TextHoverEffect = ({
       xmlns="http://www.w3.org/2000/svg"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      onMouseMove={(e) => setCursor({ x: e.clientX, y: e.clientY })}
+      onMouseMove={(e) =>
+        setCursor({ x: e.clientX, y: e.clientY })
+      }
       className="select-none"
     >
       <defs>
@@ -65,19 +73,15 @@ export const TextHoverEffect = ({
           r="20%"
           initial={{ cx: "50%", cy: "50%" }}
           animate={maskPosition}
-          transition={{ duration: duration ?? 0, ease: "easeOut" }}
-
-          // example for a smoother animation below
-
-          //   transition={{
-          //     type: "spring",
-          //     stiffness: 300,
-          //     damping: 50,
-          //   }}
+          transition={{
+            duration: duration ?? 0,
+            ease: "easeOut",
+          }}
         >
           <stop offset="0%" stopColor="white" />
           <stop offset="100%" stopColor="black" />
         </motion.radialGradient>
+
         <mask id="textMask">
           <rect
             x="0"
@@ -88,6 +92,7 @@ export const TextHoverEffect = ({
           />
         </mask>
       </defs>
+
       <text
         x="50%"
         y="50%"
@@ -99,6 +104,7 @@ export const TextHoverEffect = ({
       >
         {text}
       </text>
+
       <motion.text
         x="50%"
         y="50%"
@@ -118,6 +124,7 @@ export const TextHoverEffect = ({
       >
         {text}
       </motion.text>
+
       <text
         x="50%"
         y="50%"

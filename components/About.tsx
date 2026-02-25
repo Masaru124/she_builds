@@ -34,12 +34,10 @@ const Row = ({ children }: { children: React.ReactNode }) => (
 
 const About = () => {
   return (
-    <section className="bg-white px-4 border-b border-dashed border-black/20">
+    <section className="bg-white px-4 border-black/20">
       <div className="max-w-6xl mx-auto border-x border-b border-dashed border-black/20">
-
-        {/* HERO */}
         <Row>
-          <div className="py-16 sm:py-20 md:py-24 text-center max-w-3xl mx-auto px-6">
+          <div className="py-12  text-center max-w-3xl mx-auto px-6">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold mb-6 sm:mb-8 leading-tight">
               We&apos;re{" "}
               <span className="bg-black font-[new] bg-clip-text text-transparent">
@@ -48,18 +46,17 @@ const About = () => {
               the Future
             </h1>
 
-            <p className="text-gray-600 text-sm sm:text-base max-w-2xl mx-auto">
+            <p className="text-gray-600 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
               A dynamic ecosystem empowering women in technology, leadership,
               and entrepreneurship
             </p>
           </div>
         </Row>
 
-        {/* ABOUT SECTION */}
         <Row>
           <div className="px-6 sm:px-8 py-14 sm:py-20">
             <div className="grid lg:grid-cols-2 gap-10 sm:gap-14 items-center">
-              
+
               <div className="space-y-6 text-gray-700 text-sm sm:text-base leading-relaxed">
                 <p>
                   <strong className="text-gray-900">SheBuilds</strong> is more
@@ -118,7 +115,7 @@ const About = () => {
 
         {/* CORE VALUES */}
         <Row>
-          <div className="py-16 sm:py-20">
+          <div className="py-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-center">
               Our Core Values
             </h2>
@@ -129,9 +126,8 @@ const About = () => {
           {values.map((value, index) => (
             <div
               key={index}
-              className={`px-6 sm:px-8 py-12 sm:py-14 border-b border-dashed border-black/20 ${
-                index !== values.length - 1 ? "md:border-r" : ""
-              }`}
+              className={`px-6 sm:px-8 py-12 sm:py-14 border-b border-dashed border-black/20 ${index !== values.length - 1 ? "md:border-r" : ""
+                }`}
             >
               <h3 className="text-lg sm:text-xl font-bold mb-4">
                 {value.title}

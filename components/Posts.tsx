@@ -21,7 +21,6 @@ interface Post {
   };
 }
 
-/* ------------------ POST CARD ------------------ */
 
 const PostCard = ({ post }: { post: Post }) => {
   const today = new Date().toISOString().split("T")[0];
@@ -32,10 +31,9 @@ const PostCard = ({ post }: { post: Post }) => {
     <div
       className="
         group relative flex flex-col overflow-hidden
-        rounded-2xl bg-white
+        rounded-lg bg-white
         border border-black/20
         transition-all duration-300
-        hover:-translate-y-2 hover:shadow-lg
       "
     >
       {post.imageUrl && (
@@ -127,8 +125,6 @@ const PostCard = ({ post }: { post: Post }) => {
   );
 };
 
-/* ------------------ POSTS FEED ------------------ */
-
 const PostsFeed = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
@@ -162,35 +158,34 @@ const PostsFeed = () => {
     fetchPosts();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center min-h-[50vh]">
-        <div className="h-10 w-10 animate-spin rounded-full border-t-2 border-b-2 border-neutral-900"></div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="text-center text-red-600 py-12">
-        <p>{error}</p>
-      </div>
-    );
-  }
-
   return (
     <section className="bg-white px-4">
-      <div className="max-w-6xl mx-auto py-16 sm:py-20 border-x border-b border-dashed border-black/20 px-6">
-        <h1 className="text-3xl sm:text-4xl font-bold mb-10 sm:mb-14 text-gray-900 text-center">
+      <div className="max-w-6xl mx-auto px-6 py-12 border-x border-b  border-dashed border-black/20">
+        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 text-center">
           Events
         </h1>
+      </div>
+      <div className="max-w-6xl mx-auto px-6 py-16 border-x  border-dashed border-black/20">
 
-        {/* Responsive Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {posts.map((post) => (
-            <PostCard key={post.id || post._id} post={post} />
-          ))}
-        </div>
+        {loading && (
+          <div className="flex justify-center items-center min-h-[30vh]">
+            <div className="h-10 w-10 animate-spin rounded-full border-t-2 border-b-2 border-neutral-900" />
+          </div>
+        )}
+
+        {!loading && error && (
+          <div className="text-center text-red-600 py-8 text-sm sm:text-base">
+            <p>{error}</p>
+          </div>
+        )}
+
+        {!loading && !error && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {posts.map((post) => (
+              <PostCard key={post.id || post._id} post={post} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

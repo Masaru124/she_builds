@@ -39,13 +39,13 @@ const Hero = () => {
     setIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
 
   return (
-    <section className="relative overflow-hidden bg-white mx-2 border-b border-dashed border-black/20">
+    <section className="relative overflow-hidden bg-white px-4 border-b border-dashed border-black/20">
       <div className="absolute -top-32 -left-32 w-96 h-96 bg-purple-300/60 rounded-full blur-3xl" />
       <div className="absolute top-1/3 -right-32 w-96 h-96 bg-pink-300/50 rounded-full blur-3xl" />
 
-      <div className="relative max-w-6xl mx-auto px-6 py-12 text-center border-x border-dashed border-black/20">
+      <div className="relative max-w-6xl mx-auto px-6 pt-28 sm:pt-32 pb-16 sm:pb-20 text-center border-x border-dashed border-black/20">
         <div ref={textRef}>
-          <h1 className="mx-auto max-w-4xl text-4xl font-light tracking-tight text-neutral-900 sm:text-5xl md:text-6xl">
+          <h1 className="mx-auto max-w-4xl text-3xl font-light tracking-tight text-neutral-900 sm:text-5xl md:text-5xl">
             Building an ecosystem for{" "}
             <span className="font-semibold italic text-purple-600">women</span>{" "}
             who build in{" "}
@@ -54,7 +54,7 @@ const Hero = () => {
             </span>
           </h1>
 
-          <p className="mt-6 text md:text-xl text-neutral-600 max-w-2xl mx-auto">
+          <p className="mt-6 text-sm sm:text-base text-neutral-600 max-w-2xl mx-auto leading-relaxed">
             SheBuilds Bangalore is a community-led space for learning,
             collaboration, and growth across tech, design, startups, and beyond.
           </p>

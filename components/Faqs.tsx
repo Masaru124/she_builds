@@ -59,11 +59,11 @@ const FAQs = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="bg-white px-2 border-b border-dashed border-black/20">
+    <section className="bg-white px-4  border-black/20">
       <div className="max-w-6xl mx-auto px-6 py-16 border-x border-b border-dashed border-black/20">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-black">FAQs</h2>
-          <p className="mt-4 text-gray-600">
+          <h2 className="text-3xl sm:text-4xl font-bold text-black">FAQs</h2>
+          <p className="mt-4 text-sm sm:text-base text-gray-600">
             Everything you need to know about SheBuilds.
           </p>
         </div>
@@ -98,7 +98,7 @@ const FAQs = () => {
                 </button>
 
                 {isOpen && (
-                  <div className="px-4 pb-5 sm:px-6 text-gray-600 leading-relaxed">
+                  <div className="px-4 pb-5 sm:px-6 text-sm sm:text-base text-gray-600 leading-relaxed">
                     {faq.answer}
                   </div>
                 )}

@@ -160,17 +160,30 @@ const PostDetail = () => {
     }
   };
 
-  if (loading)
-    return <div className="flex justify-center p-8">Loading post...</div>;
-  if (error) return <div className="text-red-500 p-8">{error}</div>;
-  if (!post) return <div className="text-center p-8">Post not found</div>;
-
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        {isEditing ? (
+    <div className="min-h-screen bg-white">
+      <div className="max-w-4xl mx-auto px-4 py-10 sm:py-14">
+        {loading && (
+          <div className="flex justify-center items-center py-16">
+            <div className="h-10 w-10 animate-spin rounded-full border-t-2 border-b-2 border-neutral-900" />
+          </div>
+        )}
+        {!loading && error && (
+          <div className="text-center text-red-600 py-10 text-sm sm:text-base">
+            {error}
+          </div>
+        )}
+        {!loading && !error && !post && (
+          <div className="text-center py-10 text-sm sm:text-base">
+            Post not found
+          </div>
+        )}
+
+        {!loading && !error && post && isEditing ? (
           <div className="bg-white rounded-lg shadow-md p-6">
-            <h1 className="text-3xl font-bold text-gray-900 mb-8">Edit Post</h1>
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-8">
+              Edit Post
+            </h1>
 
             {error && (
               <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-6">
@@ -335,7 +348,7 @@ const PostDetail = () => {
                 </p>
               </div>
 
-              <div className="flex gap-4">
+              <div className="flex flex-wrap gap-4">
                 <button
                   type="submit"
                   disabled={updateLoading}
@@ -358,7 +371,9 @@ const PostDetail = () => {
               </div>
             </form>
           </div>
-        ) : (
+        ) : null}
+
+        {!loading && !error && post && !isEditing && (
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
             {post.imageUrl && (
               <Image
@@ -372,7 +387,7 @@ const PostDetail = () => {
 
             <div className="p-6">
               <div className="flex justify-between items-start mb-4">
-                <h1 className="text-3xl font-bold text-gray-900">
+                <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">
                   {post.title}
                 </h1>
                 <div className="flex gap-2">

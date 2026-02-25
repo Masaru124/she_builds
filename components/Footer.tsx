@@ -72,7 +72,9 @@ const Footer = () => {
             </div>
 
             <div>
-              <h4 className="font-semibold mb-5 tracking-wide">Connect</h4>
+              <h4 className="font-semibold text-white mb-5 tracking-wide">
+                Connect
+              </h4>
 
               <div className="flex items-center gap-4">
                 {SOCIAL_LINKS.map((social) => {
@@ -101,8 +103,8 @@ const Footer = () => {
       </div>
 
       <div className="m-0 md:pt-10 leading-none">
-  <TextHoverEffect text="SheBuilds" />
-</div>
+        <TextHoverEffect text="SheBuilds" />
+      </div>
     </footer>
   );
 };
