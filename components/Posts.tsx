@@ -21,82 +21,68 @@ interface Post {
   };
 }
 
-
 const PostCard = ({ post }: { post: Post }) => {
   const today = new Date().toISOString().split("T")[0];
   const eventDay = post.eventDate?.split("T")[0];
-  const isUpcoming = post.eventDate && eventDay !== undefined && eventDay >= today;
+  const isUpcoming = post.eventDate && eventDay && eventDay >= today;
 
   return (
     <div
       className="
-        group relative flex flex-col overflow-hidden
-        rounded-lg bg-white
-        border border-black/20
-        transition-all duration-300
-      "
+      group bg-white  overflow-hidden
+      border border-gray-200
+      hover:border-purple-300
+      
+      transition-all duration-300
+      flex flex-col
+    "
     >
       {post.imageUrl && (
-        <div className="relative h-48 sm:h-52 w-full overflow-hidden">
+        <div className="relative h-80 w-full overflow-hidden">
           <Image
             src={post.imageUrl}
             alt={post.title}
-            className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-            width={400}
+            width={500}
             height={400}
-            loading="lazy"
+            className="w-full h-full object-cover transition duration-500"
           />
 
-          {/* soft gradient fade */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/0 to-black/0" />
+          {post.eventDate && (
+            <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur px-3 py-1 rounded-md text-xs font-medium">
+              {format(new Date(post.eventDate), "MMM d, yyyy")}
+            </div>
+          )}
 
           {isUpcoming && (
-            <span
-              className="
-                absolute top-3 left-3
-                rounded-full
-                border border-white/30
-                bg-white/20 backdrop-blur-md
-                px-3 py-1 text-xs font-semibold text-white
-              "
-            >
+            <div className="absolute top-3 right-3 bg-purple-600 text-white text-xs px-3 py-1 rounded-full">
               Upcoming
-            </span>
+            </div>
           )}
         </div>
       )}
 
-      <div className="p-5 sm:p-6 flex flex-col flex-grow">
-        <h2 className="text-lg sm:text-xl font-semibold text-neutral-900 leading-snug">
+      <div className="p-6 flex flex-col grow">
+        <h2 className="text-lg font-semibold text-gray-900 leading-snug">
           {post.title}
         </h2>
 
-        {post.eventDate && (
-          <p className="mt-2 text-xs sm:text-sm font-medium text-neutral-700">
-            📅 {format(new Date(post.eventDate), "MMM d, yyyy")}
-          </p>
-        )}
-
-        <p className="mt-4 text-sm text-neutral-600 leading-relaxed line-clamp-3">
+        <p className="mt-3 text-sm text-gray-600 line-clamp-3 leading-relaxed">
           {post.content}
         </p>
 
-        {/* Footer */}
-        <div className="mt-6 pt-5 border-t border-dashed border-black/10 flex flex-wrap gap-2">
+        <div className="mt-6 pt-5 flex gap-2 flex-wrap">
           {post.pdfUrl && (
             <a
               href={post.pdfUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="
-                inline-flex items-center justify-center
-                rounded-lg
-                border border-black/15
-                bg-white
-                px-3 py-2 text-xs font-semibold text-neutral-900
-                hover:bg-neutral-50
-                transition
-              "
+              text-xs font-medium
+              border border-gray-200
+              px-3 py-2 
+              hover:bg-gray-50
+              transition
+            "
             >
               View PDF
             </a>
@@ -108,13 +94,12 @@ const PostCard = ({ post }: { post: Post }) => {
               target="_blank"
               rel="noopener noreferrer"
               className="
-                inline-flex items-center justify-center
-                rounded-lg
-                bg-neutral-900
-                px-4 py-2 text-xs font-semibold text-white
-                hover:bg-neutral-800
-                transition
-              "
+              text-xs font-semibold
+              bg-purple-600 text-white
+              px-4 py-2
+              hover:bg-purple-700
+              transition
+            "
             >
               {post.customButtonLabel || "Register"}
             </a>
@@ -159,28 +144,38 @@ const PostsFeed = () => {
   }, []);
 
   return (
-    <section className="bg-white px-4">
-      <div className="max-w-6xl mx-auto px-6 py-12 border-x border-b  border-dashed border-black/20">
-        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 text-center">
-          Events
+    <section className="bg-white">
+      {/* HERO */}
+      <div className="max-w-7xl mx-auto px-6 pt-20 pb-10 text-left">
+        <h1 className="text-4xl md:text-5xl font-[new] font-semibold text-gray-900">
+          Community Events
         </h1>
-      </div>
-      <div className="max-w-6xl mx-auto px-6 py-16 border-x  border-dashed border-black/20">
 
+        <p className="text-gray-600 mt-4 mx-auto text">
+          Workshops, hackathons, demo days and build sessions from the SheBuilds
+          Bangalore community.
+        </p>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 pb-24">
         {loading && (
-          <div className="flex justify-center items-center min-h-[30vh]">
-            <div className="h-10 w-10 animate-spin rounded-full border-t-2 border-b-2 border-neutral-900" />
+          <div className="flex justify-center py-20">
+            <div className="h-10 w-10 rounded-full border-t-2 border-b-2 border-purple-600 animate-spin" />
           </div>
         )}
 
         {!loading && error && (
-          <div className="text-center text-red-600 py-8 text-sm sm:text-base">
-            <p>{error}</p>
+          <div className="text-center text-red-600 py-10">{error}</div>
+        )}
+
+        {!loading && !error && posts.length === 0 && (
+          <div className="text-center text-gray-500 py-20">
+            No events posted yet.
           </div>
         )}
 
-        {!loading && !error && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        {!loading && !error && posts.length > 0 && (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {posts.map((post) => (
               <PostCard key={post.id || post._id} post={post} />
             ))}

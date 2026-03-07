@@ -6,14 +6,10 @@ import gsap from "gsap";
 
 const images = [
   "/gallery/img1.png",
-  "/gallery/img2.png",
-  "/gallery/img3.png",
-  "/gallery/img4.png",
 ];
 
 const Hero = () => {
   const textRef = useRef<HTMLDivElement | null>(null);
-  const [index, setIndex] = useState(0);
 
   useEffect(() => {
     if (!textRef.current) return;
@@ -33,41 +29,35 @@ const Hero = () => {
     );
   }, []);
 
-  const next = () => setIndex((prev) => (prev + 1) % images.length);
-
-  const prev = () =>
-    setIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
 
   return (
-    <section className="relative overflow-hidden bg-white px-4 border-b border-dashed border-black/20">
-      <div className="absolute -top-32 -left-32 w-96 h-96 bg-purple-300/60 rounded-full blur-3xl" />
-      <div className="absolute top-1/3 -right-32 w-96 h-96 bg-pink-300/50 rounded-full blur-3xl" />
+    <section className="relative overflow-hidden bg-white">
+      {/* <div className="absolute -top-32 -left-32 w-96 h-96 bg-purple-300/60 rounded-full blur-3xl" />
+      <div className="absolute top-1/3 -right-32 w-96 h-96 bg-pink-300/50 rounded-full blur-3xl" /> */}
 
-      <div className="relative max-w-6xl mx-auto px-6 pt-28 sm:pt-32 pb-16 sm:pb-20 text-center border-x border-dashed border-black/20">
+      <div className="relative mx-auto px-6 pt-30 sm:pt-36 pb-16 sm:pb-20 text-center">
         <div ref={textRef}>
           <h1 className="mx-auto max-w-4xl text-3xl font-light tracking-tight text-neutral-900 sm:text-5xl md:text-5xl">
-            Building an ecosystem for{" "}
+            Where{" "}
             <span className="font-semibold italic text-purple-600">women</span>{" "}
-            who build in{" "}
+            ship real projects in{" "}
             <span className="underline decoration-purple-600 decoration-wavy underline-offset-8">
               Bangalore
             </span>
           </h1>
 
           <p className="mt-6 text-sm sm:text-base text-neutral-600 max-w-2xl mx-auto leading-relaxed">
-            SheBuilds Bangalore is a community-led space for learning,
-            collaboration, and growth across tech, design, startups, and beyond.
+            Workshops, grants, and build sessions for women in tech, design,
+            and startups. Based in Bangalore, open to everyone ready to make things.
           </p>
         </div>
 
         <div className="relative mt-14 mx-auto w-full max-w-4xl">
-          <div className="relative h-100 md:h-120 overflow-hidden rounded-lg">
+          <div className="relative h-100 md:h-120 overflow-hidden">
             {images.map((src, i) => (
               <div
                 key={src}
-                className={`absolute inset-0 transition-opacity duration-700 ${
-                  i === index ? "opacity-100" : "opacity-0"
-                }`}
+                className={`absolute inset-0 transition-opacity duration-700 `}
               >
                 <Image
                   src={src}
@@ -80,19 +70,7 @@ const Hero = () => {
             ))}
           </div>
 
-          <button
-            onClick={prev}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/70 hover:bg-white text-black rounded-full w-10 h-10 flex items-center justify-center"
-          >
-            ‹
-          </button>
-
-          <button
-            onClick={next}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/70 hover:bg-white text-black rounded-full w-10 h-10 flex items-center justify-center"
-          >
-            ›
-          </button>
+         
         </div>
       </div>
     </section>
